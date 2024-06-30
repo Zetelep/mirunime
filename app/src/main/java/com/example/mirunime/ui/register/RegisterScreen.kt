@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -24,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,8 +53,9 @@ fun RegisterScreen(
     viewModel: UserViewModel,
     navController: NavHostController
 ) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var username by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
 
     val userInsertStatus by viewModel.userInsertStatus.observeAsState()
     val context = LocalContext.current
@@ -59,7 +63,9 @@ fun RegisterScreen(
 
     Surface(
         color = Color.Black,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
 
 
@@ -119,6 +125,11 @@ fun RegisterScreen(
                     hint = "Username",
                     value = username,
                 )
+                CTextField(
+                    onValueChange = { email = it},
+                    hint = "Email",
+                    value = email,
+                )
 
                 CTextField(
                     onValueChange = {password = it},
@@ -129,8 +140,7 @@ fun RegisterScreen(
                 Spacer(modifier = Modifier.size(45.dp))
 
                 Button(onClick = {
-                    viewModel.register(username,password)
-
+                    viewModel.register(username,password, email)
                 },
                     shape = MaterialTheme.shapes.large,
                     colors = ButtonDefaults.buttonColors(

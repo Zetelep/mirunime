@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,6 +43,7 @@ import com.example.mirunime.R
 import com.example.mirunime.ui.theme.AlegreyaFontFamily
 import com.example.mirunime.ui.theme.AlegreyaSansFontFamily
 import com.example.mirunime.ui.components.CTextField
+import com.example.mirunime.ui.components.PasswordTextField
 import com.example.mirunime.viewmodel.UserViewModel
 
 
@@ -48,13 +52,15 @@ fun LoginScreen(
     navController: NavHostController,
     viewModel: UserViewModel
 ) {
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
+        var username by rememberSaveable { mutableStateOf("") }
+        var password by rememberSaveable { mutableStateOf("") }
         val context = LocalContext.current
 
     Surface(
         color = Color.Black,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
 
 
@@ -64,6 +70,7 @@ fun LoginScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .align(Alignment.BottomCenter)
+
             )
 
             //Content
@@ -116,7 +123,7 @@ fun LoginScreen(
                     value = username
                 )
 
-                CTextField(
+                PasswordTextField(
                     hint = "Password",
                     value = password,
                     onValueChange = {password = it}

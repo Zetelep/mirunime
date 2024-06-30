@@ -2,11 +2,13 @@ package com.example.mirunime.ui.components
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.sharp.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.sharp.ExitToApp
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -37,6 +39,15 @@ fun TopBar(navController: NavHostController,
         },
 
         actions = {
+            IconButton(onClick = {
+                navController.navigate("welcome") {
+                    popUpTo(navController.graph.startDestinationId) {
+                        inclusive = true
+                    }
+                }
+            }) {
+                Icon(imageVector = Icons.AutoMirrored.Sharp.ExitToApp, contentDescription = "logout")
+            }
             if(showSearchIcon)
             IconButton(onClick = {navController.navigate("search")}) {
                 Icon(imageVector = Icons.Filled.Search, contentDescription = "search")

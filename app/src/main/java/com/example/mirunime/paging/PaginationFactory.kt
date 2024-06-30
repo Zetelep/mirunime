@@ -1,9 +1,6 @@
 package com.example.mirunime.paging
 
 import retrofit2.Response
-import retrofit2.http.Query
-import java.lang.Error
-import kotlin.jvm.Throws
 
 class PaginationFactory<Key, Item>(
     private val initialPage: Key,
@@ -16,13 +13,11 @@ class PaginationFactory<Key, Item>(
 
     private inline val onError: suspend (Throwable?) -> Unit,
 
-    private inline val onSuccess: suspend (Items: Item, newPage:Key) -> Unit
+    private inline val onSuccess: suspend (item: Item, newPage:Key) -> Unit
 ):Pagination<Key,Item> {
 
     private var currentKey = initialPage
     private var isMakingRequest = false
-
-    private var query:String = ""
 
     override suspend fun loadNextPage() {
         if (isMakingRequest){
@@ -44,8 +39,6 @@ class PaginationFactory<Key, Item>(
             onLoadUpdated(false)
         }
     }
-
-
 
     override fun reset() {
         currentKey = initialPage

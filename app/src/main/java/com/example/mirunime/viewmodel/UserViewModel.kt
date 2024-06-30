@@ -21,7 +21,7 @@ class UserViewModel :ViewModel() {
     val userInsertStatus: LiveData<Result<Boolean>> = _userInsertStatus
 
 
-    fun register(username: String, password: String) {
+    fun register(username: String, password: String,email:String) {
         viewModelScope.launch(Dispatchers.IO) {
             val existingUser = repository.getUserByName(username)
             if (existingUser != null) {
@@ -30,7 +30,7 @@ class UserViewModel :ViewModel() {
 
                 val hashedPassword = Bcrypt.hash(password, 12).toString(Charsets.UTF_8)
 
-                val result = repository.addUser(User(username = username, password =hashedPassword))
+                val result = repository.addUser(User(username = username, password =hashedPassword, email = email))
                 _userInsertStatus.postValue(Result.success(result > 0))
 
             }

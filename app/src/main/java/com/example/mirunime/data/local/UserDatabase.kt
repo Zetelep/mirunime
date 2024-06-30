@@ -8,7 +8,7 @@ import com.example.mirunime.model.User
 abstract class UserDatabase : RoomDatabase() {
 
     companion object{
-        const val NAME = "mirunime_db"
+        const val NAME = "mirunime_user_db"
     }
 
     abstract fun getUserDao():UserDao

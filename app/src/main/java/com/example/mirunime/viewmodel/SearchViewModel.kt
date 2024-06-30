@@ -1,5 +1,6 @@
 package com.example.mirunime.viewmodel
 
+import ScreenState
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

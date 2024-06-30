@@ -45,7 +45,7 @@ fun NavigationView() {
         }
 
         composable("search"){
-            SearchScreen(navController = navController, viewModel = SearchViewModel())
+            SearchScreen(navController = navController)
         }
     }
 }

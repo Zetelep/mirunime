@@ -8,7 +8,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiInterface {
-
     @GET("top/anime")
     suspend fun getAnimeList(
         @Query("page")page: Int,
@@ -27,6 +26,4 @@ interface ApiInterface {
         @Query("page")page: Int=1,
         @Query("sfw")sfw:Boolean = true,
         ):Response<ListAnimeResponse>
-
-
 }

@@ -14,5 +14,4 @@ interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun addUser(user: User): Long
-
 }

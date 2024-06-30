@@ -1,15 +1,11 @@
 package com.example.mirunime.viewmodel
 
+import ScreenState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.mapSaver
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mirunime.model.Anime
-import com.example.mirunime.model.AnimeResponse
-import com.example.mirunime.model.page
 import com.example.mirunime.paging.PaginationFactory
 import com.example.mirunime.repository.AnimeRepository
 import kotlinx.coroutines.launch
@@ -78,13 +74,3 @@ class AnimeViewModel: ViewModel(){
         }
     }
 }
-
-data class ScreenState(
-    val animeList: List<Anime> = emptyList(),
-    val page: Int = 1,
-    val detailData: AnimeResponse = AnimeResponse(Anime()),
-    val endReached: Boolean = page().has_next_page,
-    val error: String? = null,
-    val isLoading: Boolean = false,
-    val query: String = ""
-)
